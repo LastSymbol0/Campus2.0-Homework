@@ -1,20 +1,57 @@
-// Campus2.0-Homework.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+#include "Server.h"
 
+#include <winsock2.h>
+//#include <ws2tcpip.h>
 #include <iostream>
+
+#pragma comment(lib, "Ws2_32.lib")
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    std::cout << "Initializing..\n";
+
+    Server* server = new Server();
+
+    if (server->Init())
+    {
+        std::cout << "WSAStartup success!" << std::endl;
+    }
+    else
+    {
+        std::cout << "WSAStartup failed!" << std::endl;
+    }
+
+    if (server->CreateSocket())
+    {
+        std::cout << "CreateSocket success!" << std::endl;
+    }
+    else
+    {
+        std::cout << "CreateSocket failed!" << std::endl;
+    }
+
+    if (server->BindSocket())
+    {
+        std::cout << "BindSocket success!" << std::endl;
+    }
+    else
+    {
+        std::cout << "BindSocket failed!" << std::endl;
+    }
+
+    while (true)
+    {
+        std::string input;
+        std::cout << "Press 'l' for listen, or 's' for send..." << std::endl;
+        std::cin >> input;
+        if (input == "l")
+        {
+            server->ListenSocket();
+        }
+        else if (input == "s")
+        {
+            server->SendBroadcastMessage("dewd");
+        }
+        std::cout << std::endl;
+    }
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
