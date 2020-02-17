@@ -151,11 +151,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Campus2.0-Homework.cpp" />
-    <ClCompile Include="Server.cpp" />
+    <ClInclude Include="src\Server.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Server.h" />
+    <ClCompile Include="src\Campus2.0-Homework.cpp" />
+    <ClCompile Include="src\Server.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
